@@ -1,19 +1,33 @@
 <template>
   <div class="columns is-marginless">
     <div class="column is-three-quarters">
-      <ListProduct :products="products" />
+      <ListProduct :products="products" @active="switchProduct"/>
     </div>
     <div class="column">
-      <DetailProduct></DetailProduct>
+      <DetailProduct @desactive="desactive" :products="productActive" v-if="productActive"></DetailProduct>
     </div>
   </div>
 </template>
 
 <script setup>
-import {ref} from 'vue'
-import ListProduct from '../components/ListProduct.vue'
+import { ref } from 'vue';
+import ListProduct from '../components/ListProduct.vue';
 import DetailProduct from '@/components/DetailProduct.vue';
 
+const productActive = ref(null);
+
+const desactive = (id) =>{
+  let index = products.value.findIndex((product) => product._id == id)
+  if(index != -1){
+    products.value[index].isActive = false
+    // productActive.value.isActive = false
+    productActive.value = null
+  }
+}
+
+const switchProduct = (index) => {
+  productActive.value = products.value[index];
+};
 
 const products = ref([
   {

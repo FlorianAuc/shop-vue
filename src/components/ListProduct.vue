@@ -7,9 +7,10 @@
         <ul class="menu-list">
           <li
             v-for="(product, index) in products"
+            v-show="product.isActive"
             :key="index"
-            :data-id="index"
             class="list-product menu-item"
+            @click="active(index)"
           >
             <img :src="product.picture" alt="picture" class="product-image" />
             {{ product.name }}
@@ -25,11 +26,16 @@
 
 const props = defineProps({
   products: {
-    type: Array
+    type: Array,
+    
   }
 });
 
+const emit = defineEmits(['active'])
 
+const active = (key) =>{
+  emit('active', key)
+}
 
 </script>
 
