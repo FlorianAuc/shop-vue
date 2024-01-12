@@ -2,7 +2,6 @@
 <template>
 
   <FormContact @soummettre="newContact"/>
-  <p v-if="messageOk">{{ messageText }}</p>
 </template>
 
 <script setup>
