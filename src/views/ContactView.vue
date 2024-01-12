@@ -1,17 +1,22 @@
-<script setup>
-import FormContact from '@/components/FormContact.vue';
-</script>
 
 <template>
 
   <FormContact @soummettre="newContact"/>
+  <p v-if="messageOk">{{ messageText }}</p>
 </template>
 
-<script>
-
+<script setup>
+import FormContact from '@/components/FormContact.vue';
+import router from '@/router';
 const newContact = (infos) =>{
+
   console.log(infos.name);
+  setTimeout(() => {
+    router.push('/')
+    
+  }, 2000);
 }
+
 
 </script>
 
